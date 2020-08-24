@@ -85,6 +85,17 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "Lightline 
 Plug 'itchyny/lightline.vim'
 
+" Vim window resizing
+Plug 'camspiers/lens.vim'
+
+" Python Syntax highlight
+Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
+
+" Linting support
+Plug 'dense-analysis/ale'
+
+" Javascript Plugins
+Plug 'sheerun/vim-polyglot'
 
 call plug#end()
 
@@ -278,3 +289,28 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+
+
+" Semshi configuration
+function MyCustomHighlights()
+    hi semshiLocal           ctermfg=209 guifg=#ff875f
+    hi semshiGlobal          ctermfg=214 guifg=#ffaf00
+    hi semshiImported        ctermfg=178 guifg=#d7af00 cterm=bold gui=bold
+    hi semshiParameter       ctermfg=75  guifg=#5fafff
+    hi semshiParameterUnused ctermfg=117 guifg=#87d7ff cterm=underline gui=underline
+    hi semshiFree            ctermfg=218 guifg=#ffafd7
+    hi semshiBuiltin         ctermfg=207 guifg=#ff5fff
+    hi semshiAttribute       ctermfg=49  guifg=#00ffaf
+    hi semshiSelf            ctermfg=249 guifg=#b2b2b2
+    hi semshiUnresolved      ctermfg=166 guifg=#d75f00 cterm=underline gui=underline
+    hi semshiSelected        ctermfg=231 guifg=#ffffff ctermbg=161 guibg=#d7005f
+
+    hi semshiErrorSign       ctermfg=231 guifg=#ffffff ctermbg=160 guibg=#d70000
+    hi semshiErrorChar       ctermfg=231 guifg=#ffffff ctermbg=160 guibg=#d70000
+endfunction
+autocmd ColorScheme * call MyCustomHighlights()
+
+hi semshiUnresolved      ctermfg=166 guifg=#d75f00 cterm=underline gui=underline
+hi semshiImported        ctermfg=178 guifg=#d7af00 cterm=bold gui=bold
+hi semshiAttribute       ctermfg=34 guifg=#00af00
+hi semshiSelected        ctermfg=231 guifg=#ffffff ctermbg=176 guibg=#d787d7
