@@ -1,4 +1,10 @@
 
+" NeoVim Python virtualenv
+" virtualenv ~/envs/py3nvim
+" source ~/envs/py3nvim/bin/activate
+" pip install pynvim
+let g:python3_host_prog = '~/envs/py3nvim/bin/python'
+
 " enter the current millenium
 set nocompatible
 
@@ -11,9 +17,12 @@ set statusline+=%F
 
 
 " configure tabs
-set tabstop=4
-set shiftwidth=4
-set expandtab
+" set tabstop=4
+" set shiftwidth=4
+" set expandtab
+autocmd Filetype python setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
+autocmd Filetype typescript setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
+autocmd Filetype javascript setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 
 
 " FINDING FILES:
@@ -26,7 +35,7 @@ set path+=**
 
 " Display all matching files when we tab complete
 " set wildmenu
-" set wildignore+=**/node_modules/** 
+" set wildignore+=**/node_modules/**
 " set wildignore+=**/__pycache__/**
 " set wildignore+=**/site-packages/**
 
@@ -41,6 +50,7 @@ nnoremap Ü <C-O>
 " - Use g^] for ambiguous tags
 " - Use ^t to jump back up the tag stack
 
+
 call plug#begin()
 Plug 'tpope/vim-unimpaired'
 
@@ -53,7 +63,7 @@ Plug 'tpope/vim-fugitive'
 " GitGutter
 Plug 'airblade/vim-gitgutter'
 
-" Nerdtree 
+" Nerdtree
 Plug 'preservim/nerdtree'
 
 " Nerdtree git integration
@@ -61,8 +71,8 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 
 Plug 'tpope/vim-scriptease'
 
-Plug 'rust-lang/rust.vim'
-Plug 'ycm-core/YouCompleteMe'
+" Plug 'rust-lang/rust.vim'
+" Plug 'ycm-core/YouCompleteMe'
 
 " fzf -> fuzzy file search
 " Has a dependency of ripgrep
@@ -75,14 +85,14 @@ Plug 'junegunn/fzf.vim'
 Plug 'sonph/onehalf', {'rtp': 'vim/'}
 
 " JSX support.
-Plug 'maxmellon/vim-jsx-pretty'
 Plug 'yuezk/vim-js'
+Plug 'HerringtonDarkholme/yats.vim'
 Plug 'maxmellon/vim-jsx-pretty'
 
 "IntelliSense with COC
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-"Lightline 
+"Lightline
 Plug 'itchyny/lightline.vim'
 
 " Vim window resizing
@@ -94,17 +104,14 @@ Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 " Linting support
 Plug 'dense-analysis/ale'
 
-" Javascript Plugins
-Plug 'sheerun/vim-polyglot'
-
 call plug#end()
 
 
 set updatetime=400
 
-" Autocompletion Rust YouCompleteMe 
-let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
-let g:ycm_autoclose_preview_window_after_completion = 1
+" Autocompletion Rust YouCompleteMe
+" let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
+" let g:ycm_autoclose_preview_window_after_completion = 1
 
 
 " Colorscheme configuration
@@ -123,8 +130,31 @@ let g:lightline = {
 nmap <C-P> :FZF<CR>
 
 
-" NerdTree
+" ===========================
+" ALE (Linting)
+" ===========================
 "
+let g:ale_linters = {
+\   'python': ['flake8', 'pylint', 'pycodestyle'],
+\ }
+
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'python': ['autopep8', 'yapf'],
+\ }
+
+" Set this variable to 1 to fix files when you save them.
+let g:ale_fix_on_save = 1
+
+let g:ale_lint_on_insert_leave = 1
+let g:ale_lint_on_enter = 1
+
+let g:ale_sign_error = '>>'
+let g:ale_sign_warning = '__'
+
+" ===========================
+" NerdTree
+" ===========================
 " Automatically start up NerdTree if no file is specified.
 map <C-n> :NERDTreeToggle<CR>
 nmap <silent> <A-Up> :wincmd k<CR>
@@ -132,10 +162,20 @@ nmap <silent> <A-Down> :wincmd j<CR>
 nmap <silent> <A-Left> :wincmd h<CR>
 nmap <silent> <A-Right> :wincmd l<CR>
 
+" Show hidden files in NerdTree
+let NERDTreeShowHidden=1
+
 set number
 
-
+" ========================================
 " Sample COC configuration
+" ========================================
+let g:coc_global_extensions = [
+  \ 'coc-tsserver',
+  \ 'coc-python',
+  \ 'coc-css',
+  \ ]
+
 " TextEdit might fail if hidden is not set.
 set hidden
 
