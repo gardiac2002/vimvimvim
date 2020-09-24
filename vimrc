@@ -23,7 +23,7 @@ set statusline+=%F
 autocmd Filetype python setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
 autocmd Filetype typescript setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 autocmd Filetype javascript setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
-
+autocmd Filetype typescriptreact setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 
 " FINDING FILES:
 
@@ -127,8 +127,9 @@ let g:lightline = {
 "  FZF
 " =======================
 " Control P to search for a file.
-nmap <C-P> :FZF<CR>
 
+" ignore all folders and files which are included in .gitignore.
+nmap <C-P> :GFiles<CR>
 
 " ===========================
 " ALE (Linting)
