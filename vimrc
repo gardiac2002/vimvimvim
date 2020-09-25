@@ -104,6 +104,10 @@ Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 " Linting support
 Plug 'dense-analysis/ale'
 
+
+" Testing support
+Plug 'vim-test/vim-test'
+
 call plug#end()
 
 
