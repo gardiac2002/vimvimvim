@@ -169,7 +169,7 @@ let g:ale_linters = {
 
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\   'python': ['autopep8', 'yapf'],
+\   'python': ['autopep8', 'yapf', 'trim_whitespace', 'remove_trailing_lines', 'black'],
 \ }
 
 " Set this variable to 1 to fix files when you save them.
@@ -242,6 +242,9 @@ set number
 nmap <C-J> :TagbarToggle<CR>
 let g:tagbar_width = 35
 let g:tagbar_compact = 1
+
+" Disallow that tagbar uses maximal available width
+let g:tagbar_zoomwidth = 0
 
 " ========================================
 " Sample COC configuration
