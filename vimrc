@@ -29,11 +29,9 @@ let mapleader=" "
 " nnoremap <space> za
 " vnoremap <space> zf
 
-
+" ========================
 " configure tabs
-" set tabstop=4
-" set shiftwidth=4
-" set expandtab
+" ========================
 autocmd Filetype python setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
 autocmd Filetype typescript setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 autocmd Filetype javascript setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
@@ -47,11 +45,6 @@ nnoremap <leader>f :find *
 set path+=~/workspace
 set path+=**
 
-" Display all matching files when we tab complete
-" set wildmenu
-" set wildignore+=**/node_modules/**
-" set wildignore+=**/__pycache__/**
-" set wildignore+=**/site-packages/**
 
 " TAG JUMPING:
 
@@ -156,7 +149,7 @@ nmap <C-P> :GFiles<CR>
 " ALE (Linting)
 " ===========================
 " Ale keybindings
-" -----------------
+" ---------------------------
 
 " Go to next ALE Warning
 nmap <silent> <leader>a<Down> :ALENext<cr>
