@@ -15,6 +15,20 @@ filetype plugin on
 " show current file
 set statusline+=%F
 
+" =======================
+" Leader key
+" =======================
+nnoremap <SPACE> <Nop>
+let mapleader=" "
+
+
+" ======================
+" folding
+" ======================
+" set foldmethod=indent
+" nnoremap <space> za
+" vnoremap <space> zf
+
 
 " configure tabs
 " set tabstop=4
@@ -94,6 +108,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 "Lightline
 Plug 'itchyny/lightline.vim'
+Plug 'maximbaz/lightline-ale'
 
 " Vim window resizing
 Plug 'camspiers/lens.vim'
@@ -104,9 +119,11 @@ Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 " Linting support
 Plug 'dense-analysis/ale'
 
-
 " Testing support
 Plug 'vim-test/vim-test'
+
+" TagBar for file structure overview
+Plug 'preservim/tagbar'
 
 call plug#end()
 
@@ -138,7 +155,14 @@ nmap <C-P> :GFiles<CR>
 " ===========================
 " ALE (Linting)
 " ===========================
-"
+" Ale keybindings
+" -----------------
+
+" Go to next ALE Warning
+nmap <silent> <leader>a<Down> :ALENext<cr>
+nmap <silent> <leader>a<Up> :ALEPrevious<cr>
+
+" Ale configuration
 let g:ale_linters = {
 \   'python': ['flake8', 'pylint', 'pycodestyle'],
 \ }
@@ -158,6 +182,46 @@ let g:ale_sign_error = '>>'
 let g:ale_sign_warning = '__'
 
 " ===========================
+" Lightline
+" ===========================
+let g:lightline = {}
+
+" Register lightline-ale
+let g:lightline.component_expand = {
+      \  'linter_checking': 'lightline#ale#checking',
+      \  'linter_infos': 'lightline#ale#infos',
+      \  'linter_warnings': 'lightline#ale#warnings',
+      \  'linter_errors': 'lightline#ale#errors',
+      \  'linter_ok': 'lightline#ale#ok',
+      \ }
+
+" Set the color to the components
+let g:lightline.component_type = {
+      \     'linter_checking': 'right',
+      \     'linter_infos': 'right',
+      \     'linter_warnings': 'warning',
+      \     'linter_errors': 'error',
+      \     'linter_ok': 'right',
+      \ }
+
+" Add components to lightline on the right side.
+let g:lightline.active = { 'right': [[ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_infos', 'linter_ok' ]] }
+
+
+" ===========================
+" Vim Test
+" ===========================
+let test#python#runner = 'pytest'
+let test#strategy = 'neovim'
+
+" these "Ctrl mappings" work well when Caps Lock is mapped to Ctrl
+nmap <silent> t<C-n> :TestNearest<CR>
+nmap <silent> t<C-f> :TestFile<CR>
+nmap <silent> t<C-s> :TestSuite<CR>
+nmap <silent> t<C-l> :TestLast<CR>
+nmap <silent> t<C-g> :TestVisit<CR>
+
+" ===========================
 " NerdTree
 " ===========================
 " Automatically start up NerdTree if no file is specified.
@@ -171,6 +235,13 @@ nmap <silent> <A-Right> :wincmd l<CR>
 let NERDTreeShowHidden=1
 
 set number
+
+" =================================
+" tagbar / TagBar - file structure overview
+" =================================
+nmap <C-J> :TagbarToggle<CR>
+let g:tagbar_width = 35
+let g:tagbar_compact = 1
 
 " ========================================
 " Sample COC configuration
