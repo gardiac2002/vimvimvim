@@ -88,8 +88,8 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
 " colorschemes
-" Plug 'morhetz/gruvbox'
-Plug 'sonph/onehalf', {'rtp': 'vim/'}
+Plug 'morhetz/gruvbox'
+" Plug 'sonph/onehalf', {'rtp': 'vim/'}
 
 " JSX support.
 Plug 'yuezk/vim-js'
@@ -99,9 +99,12 @@ Plug 'maxmellon/vim-jsx-pretty'
 "IntelliSense with COC
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-"Lightline
-Plug 'itchyny/lightline.vim'
-Plug 'maximbaz/lightline-ale'
+" Airline
+" Plug 'itchyny/lightline.vim'
+" Plug 'maximbaz/lightline-ale'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
 
 " Vim window resizing
 Plug 'camspiers/lens.vim'
@@ -118,6 +121,9 @@ Plug 'vim-test/vim-test'
 " TagBar for file structure overview
 Plug 'preservim/tagbar'
 
+" Beautiful coloring of hex colors
+Plug 'ap/vim-css-color'
+
 call plug#end()
 
 
@@ -131,11 +137,13 @@ set updatetime=400
 " Colorscheme configuration
 syntax on
 set t_Co=256
+set background=dark
 set cursorline
-colorscheme onehalflight
-let g:lightline = {
-      \ 'colorscheme': 'ayu_light',
-      \ }
+" colorscheme onehalflight
+colorscheme gruvbox
+" let g:lightline = {
+"       \ 'colorscheme': 'ayu_light',
+"       \ }
 
 " =======================
 "  FZF
@@ -157,7 +165,7 @@ nmap <silent> <leader>a<Up> :ALEPrevious<cr>
 
 " Ale configuration
 let g:ale_linters = {
-\   'python': ['flake8', 'pylint', 'pycodestyle'],
+\   'python': ['flake8', 'pylint', 'pycodestyle', 'black'],
 \ }
 
 let g:ale_fixers = {
@@ -177,28 +185,28 @@ let g:ale_sign_warning = '__'
 " ===========================
 " Lightline
 " ===========================
-let g:lightline = {}
-
-" Register lightline-ale
-let g:lightline.component_expand = {
-      \  'linter_checking': 'lightline#ale#checking',
-      \  'linter_infos': 'lightline#ale#infos',
-      \  'linter_warnings': 'lightline#ale#warnings',
-      \  'linter_errors': 'lightline#ale#errors',
-      \  'linter_ok': 'lightline#ale#ok',
-      \ }
+" let g:lightline = {}
+"
+" " Register lightline-ale
+" let g:lightline.component_expand = {
+"       \  'linter_checking': 'lightline#ale#checking',
+"       \  'linter_infos': 'lightline#ale#infos',
+"       \  'linter_warnings': 'lightline#ale#warnings',
+"       \  'linter_errors': 'lightline#ale#errors',
+"       \  'linter_ok': 'lightline#ale#ok',
+"       \ }
 
 " Set the color to the components
-let g:lightline.component_type = {
-      \     'linter_checking': 'right',
-      \     'linter_infos': 'right',
-      \     'linter_warnings': 'warning',
-      \     'linter_errors': 'error',
-      \     'linter_ok': 'right',
-      \ }
-
-" Add components to lightline on the right side.
-let g:lightline.active = { 'right': [[ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_infos', 'linter_ok' ]] }
+" let g:lightline.component_type = {
+"       \     'linter_checking': 'right',
+"       \     'linter_infos': 'right',
+"       \     'linter_warnings': 'warning',
+"       \     'linter_errors': 'error',
+"       \     'linter_ok': 'right',
+"       \ }
+"
+" " Add components to lightline on the right side.
+" let g:lightline.active = { 'right': [[ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_infos', 'linter_ok' ]] }
 
 
 " ===========================
